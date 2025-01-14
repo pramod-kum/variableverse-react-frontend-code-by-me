@@ -1,0 +1,488 @@
+----------------------------------------------Life Cycle Method--------------------
+import React, { Component } from 'react'
+
+export default class Lifecycle extends Component {
+    constructor(){
+        super()
+        console.log("constructor")
+        this.state = {
+            count:0,
+            color:"red"
+        }
+      }
+        static getDerivedStateFromProps(){
+            console.log("gdsfp")
+      }
+      componentDidMount(){
+        console.log("ComponentDidMount")
+      }
+    render() {
+        console.log("render")
+    return (
+      <div>
+        <h1>Lifecycle</h1>
+      </div>
+    )
+  }
+}
+---------------------------------------
+import React from 'react'
+import Lifecycle from './class/Lifecycle'
+
+export default function App() {
+  return (
+    <div>
+      <Lifecycle/>
+    </div>
+  )
+}
+-----------------------------------------------------------------Second Code update backgroundColor-------------------------
+import React, { Component } from 'react'
+
+export default class Lifecycle extends Component {
+    constructor(){
+        super()
+        console.log("constructor")
+        this.state = {
+            count:0,
+            color:"red"
+        }
+      }
+        static getDerivedStateFromProps(props,state){
+            console.log(props,state)
+            return {color:props.color}
+            
+      }
+      componentDidMount(){
+        console.log("ComponentDidMount")
+      }
+    render() {
+        console.log("render")
+    return (
+      <div style={{backgroundColor:this.state.color}}>
+        <h1>Lifecycle</h1>
+      </div>
+    )
+  }
+}
+------------------------------------------------------
+import React from 'react'
+import Lifecycle from './class/Lifecycle'
+
+export default function App() {
+  return (
+    <div>
+      <Lifecycle firstName="Pramod" color="blue"/>
+    </div>
+  )
+}
+-------------------------------------next---------------------
+import React, { Component } from 'react'
+
+export default class Lifecycle extends Component {
+    constructor(){
+        super()
+        console.log("constructor")
+        this.state = {
+            count:0,
+            color:"red"
+        }
+      }
+    //     static getDerivedStateFromProps(props,state){
+    //         console.log(props,state)
+    //         return {color:props.color}
+            
+    //   }  
+      componentDidMount(){
+        console.log("ComponentDidMount")
+      }
+    render() {
+        console.log("render")
+    return (
+      <div style={{backgroundColor:this.state.color}}>
+        <h1>Lifecycle</h1>
+        <button onClick={()=>this.setState({count:this.state.count+1})}>count++</button>
+      </div>
+    )
+  }
+}
+-----------------------------next-------------------------
+import React, { Component } from 'react'
+
+export default class Lifecycle extends Component {
+    constructor(){
+        super()
+        console.log("constructor")
+        this.state = {
+            count:0,
+            color:"red"
+        }
+      }
+    //     static getDerivedStateFromProps(props,state){
+    //         console.log(props,state)
+    //         return {color:props.color}
+            
+    //   }  
+      componentDidMount(){
+        setInterval(()=>{
+            console.log("Pramod")
+        },1000)       
+      }
+    render() {
+        console.log("render")
+    return (
+      <div style={{backgroundColor:this.state.color}}>
+        <h1>Lifecycle</h1>
+        <button onClick={()=>this.setState({count:this.state.count+1})}>count++</button>
+      </div>
+    )
+  }
+}
+----------------------------------------next--------------------------
+import React, { Component } from 'react'
+
+export default class Lifecycle extends Component {
+    constructor(){
+        super()
+        console.log("constructor")
+        this.state = {
+            count:0,
+            color:"red"
+        }
+      }
+    //     static getDerivedStateFromProps(props,state){
+    //         console.log(props,state)
+    //         return {color:props.color}
+            
+    //   }  
+    //   componentDidMount(){
+    //     setInterval(()=>{
+    //         console.log("Pramod")
+    //     },1000)       
+    //   }
+
+    //shouldComponentUpdate returns booleans
+    shouldComponentUpdate(nextProps,nextState){
+          console.log(nextProps,nextState)
+          if(nextState.count >= 10){
+            return false
+          }
+          return true
+    }
+    render() {
+        console.log("render")
+    return (
+      <div style={{backgroundColor:this.state.color}}>
+        <h1>Lifecycle</h1>
+        <h1>{this.state.count}</h1>
+        <button onClick={()=>this.setState({count:this.state.count+1})}>count++</button>
+      </div>
+    )
+  }
+}
+-------------------------------next---------------------------------
+import React, { Component } from 'react'
+
+export default class Lifecycle extends Component {
+    constructor(){
+        super()
+        console.log("constructor")
+        this.state = {
+            count:0,
+            color:"red",
+            status:""
+        }
+      }
+    //     static getDerivedStateFromProps(props,state){
+    //         console.log("DSFR")
+    //         return {color:props.color}
+            
+    //   }  
+    //   componentDidMount(){
+    //     setInterval(()=>{
+    //         console.log("Pramod")
+    //     },1000)       
+    //   }
+
+   // shouldComponentUpdate returns booleans
+    shouldComponentUpdate(nextProps,nextState){
+          console.log(nextProps,nextState)
+          if(nextState.count >= 10){
+            return false
+          }
+          return true
+    }
+    // It hold previous state
+    componentDidUpdate(prevProps,prevState){
+        console.log(prevProps,prevState)
+        if(prevState.count === 8){
+            this.setState({status:"Congratulation:-"})
+        }
+    }
+    render() {
+        console.log("render")
+    return (
+      <div style={{backgroundColor:this.state.color}}>
+        <h1>Lifecycle</h1>
+        <h1>{this.state.count}</h1>
+        <h1>{this.state.status}</h1>
+        <button onClick={()=>this.setState({count:this.state.count+1})}>count++</button>
+      </div>
+    )
+  }
+}
+----------------------------------
+import React from 'react'
+import Lifecycle from './class/Lifecycle'
+
+export default function App() {
+  return (
+    <div>
+      <Lifecycle firstName="Pramod" color="blue"/>
+    </div>
+  )
+}
+------------------useEffect--------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  useEffect(()=>{
+    console.log("Effect");
+  })
+  function handleIncrement(){
+    setCount(count+1)
+  }
+  return (
+    <div>
+    <h1>{count}</h1>
+      {/* <button onClick={handleIncrement}>+++</button> */}
+    
+      <button onClick={()=>{handleIncrement()}}>+++</button>
+    </div>
+  )
+}
+--------------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  useEffect(()=>{
+    console.log("Effect");
+  })
+
+  return (
+    <div>
+    <h1>{count}</h1>
+      
+      <button onClick={()=>setCount(count+1)}>+++</button>
+    </div>
+  )
+}
+---------------------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  useEffect(()=>{
+    console.log("Effect");
+  },[])
+
+  return (
+    <div>
+    <h1>{count}</h1>
+      
+      <button onClick={()=>setCount(count+1)}>+++</button>
+    </div>
+  )
+}
+-----------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+    console.log("Effect");
+  })
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+}
+------------------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+    console.log("Effect");
+  },[])
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+}
+----------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+    console.log("Effect");
+  },[count,number])
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+
+-------------------------------useEffect Hook------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+   let fun = () =>{
+    alert('Hi How are you?')
+   // console.log("Hi How are you?")
+   }
+   document.addEventListener("click",fun)
+  },[count,number])
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+}
+-------------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+   let fun = () =>{
+   // alert('Hi How are you?')
+   console.log("Hi How are you?")
+   }
+   document.addEventListener("click",fun)
+   return ()=>{
+    document.removeEventListener("click",fun)
+   }
+  },[count,number])
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+}
+----------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+   let fun = () =>{
+   // alert('Hi How are you?')
+   console.log("Hi How are you?")
+   }
+  //  document.addEventListener("click",fun)
+  //  return ()=>{
+  //   document.removeEventListener("click",fun)
+  //  }
+  setInterval(fun,3000)
+  },[count,number])
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+}
+-----------------------------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  useEffect(()=>{
+   let fun = () =>{
+   // alert('Hi How are you?')
+   console.log("Hi How are you?")
+   }
+  //  document.addEventListener("click",fun)
+  //  return ()=>{
+  //   document.removeEventListener("click",fun)
+  //  }
+  let interval = setInterval(fun,3000)
+  return ()=>{
+    clearInterval(interval)
+  } 
+  },[count,number])
+
+  return (
+    <div>
+    <h1>{count}</h1>     
+      <button onClick={()=>setCount(count+1)}>+++</button>
+      <h1>{number}</h1>     
+      <button onClick={()=>setNumber(number-1)}>---</button>
+    </div>
+  )
+}
+----------------------fetch joke from API and implimenting useEfect Hook also------------------
+import React, { useEffect, useState } from 'react'
+
+export default function App() {
+  const [data,setData] = useState({})
+  function generateJoke(){
+   let data = fetch("https://official-joke-api.appspot.com/random_joke")
+  data.then((result)=>{
+   return result.json()
+  }).then((response)=>{
+   //console.log(response)
+   setData(response)
+  })
+  }
+  useEffect(()=>{
+    generateJoke()
+  },[])
+  return (
+    <div>
+      <h1>setup : {data.setup}</h1>
+      <h1>punchline : {data.punchline}</h1>
+      <button onClick={generateJoke}>Generate Jokes</button>
+    </div>
+  )
+}
+
+

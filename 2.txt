@@ -1,0 +1,335 @@
+-------------------------Cont Will not Increment on This Logic----------------------------
+import React from 'react'
+
+export default function App() {
+  var count = 0;
+  function handleIncrement(){
+    count=count+1;
+    console.log(count);
+  }
+  return (
+    <div>
+      <h1>Hellow World</h1>
+      <h1>count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  )
+}
+
+-------------------------Count will incerement using useState----------------
+import React, { useState } from 'react'
+
+export default function App() {
+ 
+ const [count,setCount] = useState(0)
+
+ function handleIncrement(){
+ 
+  setCount(count+1);
+  
+ }
+
+  return (
+    <div>
+      <h1>Hellow World</h1>
+      <h1>count: {count}</h1>
+      <button onClick={handleIncrement}>Increment</button>
+    </div>
+  )
+}
+----------------------------------
+import React, { useState } from 'react'
+
+export default function App() {
+ 
+ const [count,setCount] = useState(0)
+ const [text,setText] = useState("Pramod")
+
+ function handleIncrement(){
+ 
+  setCount(count+1);
+  
+ }
+
+  return (
+    <div>
+      <h1>Hellow World</h1>
+      
+      <h1>count: {count}</h1>
+      <h1>Name: {text}</h1>
+      
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={()=>setText("Kumar")}>Change</button>
+    </div>
+  )
+}
+------------------------------------ It will add only 1 Not 4 because it is state management-----------
+import React from 'react'
+import Counter from './state/Counter'
+function App() {
+  return (
+    <div>
+      <Counter/>
+    </div>
+  )
+}
+
+export default App
+-----------------------------
+import React, { useState } from 'react'
+
+function Counter() {
+  const [count,setCount] = useState(0)
+  function handleClick(){
+    setCount(count+1)
+    setCount(count+1)
+    setCount(count+1)
+    setCount(count+1)
+  }
+  return (
+    <div>
+       <p>count: {count}</p> 
+       <button onClick={handleClick}>Add 4</button>
+    </div>
+  )
+}
+
+export default Counter
+
+---------We can solve add 4 using this updater function because it is state management------------------------
+import React, { useState } from 'react'
+
+function Counter() {
+  const [count,setCount] = useState(0)
+  function handleClick(){
+    setCount(x=>x+1)
+    setCount(x=>x+1)
+    setCount(x=>x+1)
+    setCount(x=>x+1)
+  }
+  return (
+    <div>
+       <p>count: {count}</p> 
+       <button onClick={handleClick}>Add 4</button>
+    </div>
+  )
+}
+
+export default Counter
+----------------------------------
+import React from 'react'
+import Counter from './state/Counter'
+function App() {
+  return (
+    <div>
+      <Counter/>
+    </div>
+  )
+}
+
+export default App
+
+----------------------Now It will update by 2 because of last update count+2 in state management---------
+import React, { useState } from 'react'
+
+function Counter() {
+  const [count,setCount] = useState(0)
+  function handleClick(){
+    setCount(x=>x+1)
+    setCount(x=>x+1)
+    setCount(x=>x+1)
+    setCount(count+2)
+  }
+  return (
+    <div>
+       <p>count: {count}</p> 
+       <button onClick={handleClick}>Add 4</button>
+    </div>
+  )
+}
+
+export default Counter
+---------------------------------
+import React from 'react'
+import Counter from './state/Counter'
+function App() {
+  return (
+    <div>
+      <Counter/>
+    </div>
+  )
+}
+
+export default App
+---------------------Light mode to Dark mode Toggle----------------
+import React from 'react'
+import Themchanger from './state/Themchanger'
+
+function App() {
+  return (
+    <div>
+      <Themchanger/>
+    </div>
+  )
+}
+
+export default App
+-----------------------------
+.dark{
+    background-color: black;
+}
+.light{
+    background-color: #fff;
+}
+div{
+    height: 80vh;
+}
+---------------------------
+import React, { useState } from 'react'
+import "./theme.css"
+function Themchanger() {
+    const [cname,setCname] = useState('light');
+    function handleClick(){
+        if(cname==="light"){
+            setCname('dark')
+        }else{
+            setCname('light')
+        }
+        
+    }
+  return (
+    <div className={cname}>
+      <button onClick={handleClick}>Dark/Light Mode</button>
+    </div>
+  )
+}
+
+export default Themchanger
+----------------------------------Second Way Update Button text also----------------------
+import React, { useState } from 'react'
+import "./theme.css"
+function Themchanger() {
+    const [cname,setCname] = useState('light');
+    const [text,setText] = useState("Dark");
+    function handleClick(){
+        if(cname==="light"){
+            setCname('dark')
+            setText("Light")
+        }else{
+            setCname('light')
+            setText("Dark")
+        }
+        
+    }
+  return (
+    <div className={cname}>
+      <button onClick={handleClick}>{text} Mode</button>
+    </div>
+  )
+}
+
+export default Themchanger
+--------------------------------------------We can use in-line css like this in React--------------------
+<div style={{backgroundColor:"red",color:"white",fontSize:"10px"}}>
+      <button onClick={handleClick}>{text} Mode</button>
+      <h1>Pramod Kumar</h1>
+    </div>
+-------------------------Updated Light Mode To Dark Mode-----------------
+import React, { useState } from 'react'
+import "./theme.css"
+function Themchanger() {
+    const [color,setColor] = useState("black")
+    const [bgcolor,setBgcolor] = useState('white');
+    const [text,setText] = useState("Dark");
+    function handleClick(){
+       if(bgcolor==="white"){
+           setBgcolor('black');
+           setText("Light");
+           setColor("white");
+       }else{
+        setBgcolor('white');
+        setText("Dark");
+        setColor("black");
+       }
+        
+    }
+  return (
+    <div style={{backgroundColor:bgcolor}}>
+      <button onClick={handleClick}>{text} Mode</button>
+      <h1 style={{color:color}}>Pramod Kumar</h1>
+    </div>
+  )
+}
+
+export default Themchanger
+-----------------------------Light Mode To Dark Mode using turnery operator-----------------
+import React, { useState } from 'react'
+import "./theme.css"
+function Themchanger() {
+    const [condition,setColndition] = useState(true)
+    function handleClick(){
+       
+        setColndition(!condition);
+       
+        // if(condition===true){
+        //     setColndition(false);
+        // }else{
+        //     setColndition(true);
+        // }
+    }
+    
+  return (
+    <div style={{backgroundColor:condition?"black":"white"}}>
+      <button onClick={handleClick}>{condition?"Light":"Dark"} Mode</button>
+      <h1 style={{color:condition?"white":"black"}}>Pramod Kumar</h1>
+    </div>
+  )
+}
+
+export default Themchanger
+----------------------------2 nav button using state management ----------
+import React, { useState } from 'react'
+
+function App() {
+  var [condition,setCondition] = useState(true)
+  return (
+    <div>
+      <h1>Hello, World!</h1>
+      <nav>
+      <button onClick={()=>setCondition(true)}>Pramod Component</button>
+      <button onClick={()=>setCondition(false)}>Ayansh Component</button>
+      </nav>
+     {/* {condition ? <Pramod/> : <Ayansh/>} */}
+     {condition && <Pramod/>}
+     {!condition && <Ayansh/>}
+    </div>
+  )
+}
+function Pramod(){
+  return(
+    <div>
+      <h1>Pramod Component</h1>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+    </div>
+  )
+}
+function Ayansh(){
+  return(
+    <div>
+      <h1>Ayansh Component</h1>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+    </div>
+  )
+}
+
+export default App
+
+
+
+
+
+
+
+
+
+

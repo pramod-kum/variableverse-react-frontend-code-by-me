@@ -1,0 +1,481 @@
+------------------Error Boundaries----------------
+import React, { useEffect, useState } from 'react'
+
+export default function Counter() {
+    const [counter,setCounter] = useState(0)
+  useEffect(()=>{
+    if(counter===15){
+        throw new Error("App Dimaged")
+    }
+  })
+    return (
+    <div>
+      <h1>count : {counter}</h1>
+      <button onClick={()=>setCounter(counter+1)}>++++</button>
+    </div>
+  )
+}
+-------------------------------
+import React, { Component } from 'react'
+
+export default class Errorboundary extends Component {
+  
+    constructor(){
+        super()
+        this.state={
+            error:null,
+            errorInfo:null
+        }
+    }
+    componentDidCatch(error,info){
+        this.setState({
+            error:error,
+            errorInfo:info
+        })
+    }
+  
+    render() {
+        if(this.state.errorInfo){
+            return(
+                <div>
+                    <h1>Ooops...Error</h1>
+                    <h1>There is a Error</h1>
+                </div>
+            )
+        }
+        return this.props.children
+  }
+}
+-----------------------------
+import React from 'react'
+import Counter from './Counter'
+import Errorboundary from './efficiency/errorBoundary/Errorboundary'
+
+export default function App() {
+  return (
+    <div>
+      
+<Errorboundary>
+<Counter/>
+<Counter/>
+</Errorboundary>
+<Counter/>
+ 
+      <h1>Pramod Kumar</h1>
+    </div>
+  )
+}
+---------------------Custom Hooks-------------------
+import { useState } from "react"
+
+const useCounter=()=>{
+    const [count,setCount] = useState(0)
+    const increment =()=>{
+        setCount(count+1)
+    }
+    const decrement=()=>{
+        setCount(count-1)
+    }
+    return {
+      count:count,
+      increment:increment,
+      decrement:decrement
+    }
+}
+export default useCounter
+----------------------------------
+import React from 'react'
+import useCounter from './UseCounter'
+
+export default function Counterr() {
+    const {count,increment,decrement}=useCounter()
+  return (
+    <div>
+        <h1>Counter :{count}</h1>
+        <button onClick={()=>increment()}>Increment</button>
+        <button onClick={()=>decrement()}>decrement</button>
+    </div>
+  )
+}
+--------------------------------------
+import React from 'react'
+
+import Counterr from './custom Hooks/Counterr'
+
+export default function App() {
+  return (
+    <div>
+      <Counterr/>
+    </div>
+  )
+}
+---------------Next Code---------------
+import React from 'react'
+import useCounter from './UseCounter'
+
+export default function Like() {
+    const {count,increment} = useCounter()
+  return (
+    <div>
+    <h1 onClick={()=>increment()}>Like : {count}</h1>
+    </div>
+  )
+}
+------------------------
+import React from 'react'
+import useCounter from './UseCounter'
+
+export default function Counterr() {
+    const {count,increment,decrement}=useCounter()
+  return (
+    <div>
+        <h1>Counter :{count}</h1>
+        <button onClick={()=>increment()}>Increment</button>
+        <button onClick={()=>decrement()}>decrement</button>
+    </div>
+  )
+}
+---------------------
+import { useState } from "react"
+
+const useCounter=()=>{
+    const [count,setCount] = useState(0)
+    const increment =()=>{
+        setCount(count+1)
+    }
+    const decrement=()=>{
+        setCount(count-1)
+    }
+    return {
+      count:count,
+      increment:increment,
+      decrement:decrement
+    }
+}
+export default useCounter
+-----------------------------
+import React from 'react'
+
+import Counterr from './custom Hooks/Counterr'
+import Like from './custom Hooks/Like'
+
+export default function App() {
+  return (
+    <div>
+      <Counterr/>
+      <Like/>
+    </div>
+  )
+}
+----------------To Do List Custom Hook---------------
+import React from 'react'
+import useCounter from './UseCounter'
+
+export default function Counterr() {
+    const {count,increment,decrement}=useCounter()
+  return (
+    <div>
+        <h1>Counter :{count}</h1>
+        <button onClick={()=>increment()}>Increment</button>
+        <button onClick={()=>decrement()}>decrement</button>
+    </div>
+  )
+}
+----------------------------
+import React from 'react'
+import useCounter from './UseCounter'
+
+export default function Like() {
+    const {count,increment} = useCounter()
+  return (
+    <div>
+    <h1 onClick={()=>increment()}>Like : {count}</h1>
+    </div>
+  )
+}
+----------------------------------
+import { useState } from "react"
+
+const useCounter=()=>{
+    const [count,setCount] = useState(0)
+    const increment =()=>{
+        setCount(count+1)
+    }
+    const decrement=()=>{
+        setCount(count-1)
+    }
+    return {
+      count:count,
+      increment:increment,
+      decrement:decrement
+    }
+}
+export default useCounter
+---------------------------------
+import React, { useState } from 'react'
+import useList from './UseList'
+
+export default function AddTodo() {
+    const [text,setText]=useState("")
+    const {todo,push,pull}=useList()
+    function handleSubmit(e){
+        e.preventDefault()
+        push(text)
+        setText("")
+    }
+  return (
+    <div>
+        <form onSubmit={handleSubmit}>
+            <input type="text" placeholder='Enter Task' value={text} onChange={(e)=>setText(e.target.value)}/>
+       <button type='submit'>Add Task</button>
+        
+        </form>
+        <ul>
+            <li>{todo.map((item,index)=><li>{item} <button onClick={()=>pull(index)}>Remove</button></li>)}</li>
+        </ul>
+    </div>
+  )
+}
+---------------------------------------
+import { useState } from "react"
+
+const useList = ()=>{
+    const [todo,setTodo] = useState(["HTML","CSS","JS"])
+    const push=(input)=>{
+        if(input.length>0){
+            const newList = todo.concat(input)
+        setTodo(newList)
+        }
+    }
+    const pull =(i)=>{
+        const newList = todo.filter((item,index)=>{
+            return i !==index;
+        })
+        setTodo(newList)
+    }
+    return{
+        todo,
+        push,
+        pull
+    }
+}
+export default useList
+-----------------------------
+import React from 'react'
+import AddTodo from './custom Hooks/AddTodo'
+
+import Counterr from './custom Hooks/Counterr'
+import Like from './custom Hooks/Like'
+
+export default function App() {
+  return (
+    <div>
+      <Counterr/>
+      <Like/>
+      <AddTodo/>
+    </div>
+  )
+}
+---------------------Next Code----------------
+import React from 'react'
+
+import Modal from './Modal'
+
+export default function App() {
+  return (
+    <div>
+      <Modal isOpen={true}>
+
+      </Modal>
+    </div>
+  )
+}
+-------------------------
+import React from 'react'
+
+export default function Modal(isOpen) {
+    if(!isOpen) return null
+  return (
+    <div>
+        <h1>sshshshshshsh</h1>
+    </div>
+  )
+}
+-----------------------Portal---------------
+import React from 'react'
+
+import Modal from './Modal'
+
+export default function App() {
+  return (
+    <div>
+      <Modal isOpen={true}>
+      <h1>I am a Modal Component</h1>
+      </Modal>
+    </div>
+  )
+}
+------------------------
+
+import ReactDOM from 'react-dom'
+
+export default function Modal({isOpen,children}) {
+    if(!isOpen) return null
+  return ReactDOM.createPortal(
+    <div>
+        <div>
+            {children}
+            <button>Close</button>
+        </div>
+    </div>,
+    document.getElementById("modal-root")
+  )
+}
+----------------------------
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <div id="modal-root"></div>
+    
+  </body>
+</html>
+------------------Next Code---------------
+import React, { useState } from 'react'
+
+import Modal from './Modal'
+
+export default function App() {
+  const [isModelOpen,setIsModelOpen] = useState(false)
+  function toggleModel(){
+    setIsModelOpen(!isModelOpen)
+  }
+  return (
+    <div>
+      <h1>Open Model</h1>
+      <button onClick={toggleModel}>Open Model</button>
+      <Modal isOpen={isModelOpen} onClose={toggleModel}>
+      <h1>I am a Modal Component</h1>
+      </Modal>
+    </div>
+  )
+}
+--------------------------------
+
+import ReactDOM from 'react-dom'
+
+export default function Modal({isOpen,onClose,children}) {
+    if(!isOpen) return null
+  return ReactDOM.createPortal(
+    <div style={modalStyles}>
+        <div style={contentStyles}>
+            {children}
+            <button onClick={onClose}>Close</button>
+        </div>
+    </div>,
+    document.getElementById("modal-root")
+  )
+}
+const modalStyles={
+position:"fixed",
+top:"0",
+left:"0",
+right:"0",
+bottom:"0",
+backgroundColor:"rgba(0,0,0,0.5)",
+display:"flex",
+justifyContent:"center",
+alignItems:"center"
+}
+const contentStyles={
+    backgroundColor:"#fff",
+    borderRadius:"10px",
+    padding:"30px"
+}
+-----------------------------------
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <div id="modal-root"></div>
+    
+  </body>
+</html>
+----------------Higher Order Components-----------------
+import React from 'react'
+import Profile from './Profile';
+import withAuthenticated from './WithAuthenticated';
+
+const Dashboard = ()=>{
+  return <h1>Wellcom to your dashboard</h1>
+}
+const Hoc = withAuthenticated(Dashboard)
+export default function App() {
+  //true/false
+  const isLogged = true;
+  return (
+    <div>
+<Hoc isAuthenticated={isLogged}/>
+<Profile isAuthenticated={isLogged}/>
+    </div>
+  )
+}
+-------------------------
+const withAuthenticated =(WrappedComponent)=>{
+return function EnhancedComponent({isAuthenticated,...props}){
+    if(!isAuthenticated){
+        return <h1>Please log in to access this page!</h1>
+    }
+    return <WrappedComponent {...props}/>
+}
+}
+export default withAuthenticated
+--------------------------
+import React from 'react'
+import withAuthenticated from './WithAuthenticated';
+
+const User = ()=>{
+  return <h1>Hello Pramod</h1>
+}
+const Hoc = withAuthenticated(User)
+export default function Profile() {
+  //true/false
+  const isLogged = true;
+  return (
+    <div>
+<Hoc isAuthenticated={isLogged}/>
+    </div>
+  )
+}

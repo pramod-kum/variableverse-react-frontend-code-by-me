@@ -1,0 +1,262 @@
+-----------------------------Form Controlled----------------------------
+import React, { useState } from 'react'
+
+export default function Controlled() {
+    const [formData,setFormData]=useState({
+        name:"",
+        email:"",
+        phone:"",
+        password:""
+    })
+   const [condition,setCondition]=useState(false)
+   function handleSubmit(e){
+   e.preventDefault()
+   setCondition(true)
+   setFormData((prev)=>({...prev,name:"",email:""}))
+    }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={formData.name} onChange={(e)=>setFormData((prev)=>({...prev,name:e.target.value}))}/> <br/><br/>
+        <input type="email"value={formData.email} onChange={(e)=>setFormData((prev)=>({...prev,email:e.target.value}))}/><br/><br/>
+        <input type="number"value={formData.phone} onChange={(e)=>setFormData((prev)=>({...prev,phone:e.target.value}))}/><br/><br/>
+        <input type="password"value={formData.password} onChange={(e)=>setFormData((prev)=>({...prev,password:e.target.value}))}/><br/><br/>
+        <input type="submit" value="Submit"/>
+      {condition && (
+        <h1>{formData.name}{formData.email}</h1>
+      )}
+      </form>
+    </div>
+  )
+}
+--------------------------------------
+import React from 'react'
+import Controlled from './components/forms/Controlled'
+
+export default function App() {
+  return (
+    <div>
+      <Controlled/>
+    </div>
+  )
+}
+--------------------------------------Next code-----------------------
+import React, { useState } from 'react'
+
+export default function Controlled() {
+    const [formData,setFormData]=useState({
+        name:"",
+        email:"",
+        phone:"",
+        password:""
+    })
+   const [condition,setCondition]=useState(false)
+   function handleSubmit(e){
+   e.preventDefault()
+   setCondition(true)
+  // setFormData((prev)=>({...prev,name:"",email:""}))
+    }
+    function handleChange(e){
+        // console.log(e.target)
+        setFormData((prev)=>({...prev,[e.target.name]:e.target.value}))
+    }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={formData.name} onChange={handleChange} name='name'/> <br/><br/>
+        <input type="email"value={formData.email} onChange={handleChange} name='email'/><br/><br/>
+        <input type="number"value={formData.phone} onChange={handleChange} name='phone'/><br/><br/>
+        <input type="password"value={formData.password} onChange={handleChange} name='password'/><br/><br/>
+        <input type="submit" value="Submit"/>
+      {condition && (
+        <h1>{formData.name}{formData.email}</h1>
+      )}
+      </form>
+    </div>
+  )
+}
+-----------------------------
+import React from 'react'
+import Controlled from './components/forms/Controlled'
+
+export default function App() {
+  return (
+    <div>
+      <Controlled/>
+    </div>
+  )
+}
+--------------------------------next code------------------------
+import React, { useRef, useState } from 'react'
+
+export default function Ref() {
+    const refH = useRef(0)
+    const inputRef = useState(null)
+    
+    function handleClick(){
+      //  refH.current=100;
+      refH.current.innerHTML="Hi How are you?"
+        console.log(refH)
+    }
+    // function handlebtn(){
+    //     console.log(inputRef)
+    // }
+  return (
+    <div>
+      <h1 ref={refH}>
+       Pramod Kumar
+      </h1>
+      <input type="text" ref={inputRef}/>
+      {/* <button onClick={handlebtn}>Focus</button> */}
+      <button onClick={()=>inputRef.current.focus()}>Focus</button>
+    <h1>{refH.current.innerHTML}</h1>
+      <button onClick={handleClick}>click</button>
+    </div>
+  )
+}
+-------------------------------------
+import React from 'react'
+
+import Ref from './components/forms/Ref'
+
+export default function App() {
+  return (
+    <div>
+      <Ref/>
+    </div>
+  )
+}
+--------------------------------Uncontrolled Component---------------------
+import React, { useRef, useState } from 'react'
+
+export default function Uncontrolled() {
+    const [condition,setCondition] = useState(false)
+    const nameRef =useRef(null)
+    const emailRef =useRef(null)
+    const passRef =useRef(null)
+    function handleSubmit(e){
+    e.preventDefault()
+    setCondition(true)
+    }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input type="text" ref={nameRef}/>
+        <input type="email" ref={emailRef}/>
+        <input type="password" ref={passRef}/>
+        <input type="submit" value="Submit" />
+      </form>
+      {condition && (
+        <h1>{nameRef.current.value} {emailRef.current.value} {passRef.current.value}</h1>
+      )}
+    </div>
+  )
+}
+------------------------------
+import React from 'react'
+
+import Ref from './components/forms/Ref'
+import Uncontrolled from './components/forms/Uncontrolled'
+
+export default function App() {
+  return (
+    <div>
+      
+      <Uncontrolled/>
+    </div>
+  )
+}
+---------------------Parent Child Calling --------------------
+import React, { useRef } from 'react'
+import Child from './Child'
+
+export default function ParentRef() {
+    const btnRef = useRef(null)
+    function handleClick(){
+       btnRef.current.textContent ="Hello World"
+       console.log("Pramod")
+    }
+  return (
+    <div>
+      <h1>Forward Refs</h1>
+      <Child ref={btnRef} onclick={handleClick}>
+      Click to focus
+      </Child>
+    
+    </div>
+  )
+}
+---------------------------------------
+import { forwardRef } from "react";
+
+const Child = forwardRef((props,ref)=>(
+<button ref={ref} onClick={props.onClick}>
+    {props.children}
+</button>
+))
+export default Child
+---------------------------------------
+import React from 'react'
+
+import ParentRef from './components/forms/ParentRef'
+
+
+export default function App() {
+  return (
+    <div>
+     <ParentRef/>
+     
+    </div>
+  )
+}
+----------------------Next Code-------------------
+import React, { useRef } from 'react'
+import Fancyinput from './Fancyinput'
+
+export default function Parentinput() {
+    const inputRef = useRef(null)
+   
+  return (
+    <div>
+      <Fancyinput ref={inputRef}/>
+      <button onClick={()=>inputRef.current.focus()}>Focus</button>
+      <button onClick={()=>inputRef.current.disable()}>Disable</button>
+      <button onClick={()=>inputRef.current.enable()}>Enable</button>
+      <button onClick={()=>console.log(inputRef)}>Call</button>
+    </div>
+  )
+}
+--------------------------------------
+import { forwardRef, useImperativeHandle, useRef } from "react";
+
+const Fancyinput = forwardRef((props,ref)=>{
+    const fancyRef = useRef(null)
+    useImperativeHandle(ref,()=>({
+        focus:()=>{
+            fancyRef.current.focus()
+        },
+        disable:()=>{
+            fancyRef.current.disabled = true
+        },
+        enable:()=>{
+            fancyRef.current.disabled = false
+        }
+
+    }))
+    return <input ref={fancyRef}/>
+})
+export default Fancyinput
+-------------------------------------
+import React from 'react'
+import Parentinput from './components/forms/Parentinput'
+
+
+export default function App() {
+  return (
+    <div>
+    <Parentinput/>    
+    </div>
+  )
+}
+
+

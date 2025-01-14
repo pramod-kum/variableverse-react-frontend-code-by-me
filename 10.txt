@@ -1,0 +1,263 @@
+------------------Memoization-----------------
+import React, { useState } from 'react'
+import Memo from './efficiency/Memo'
+
+export default function App() {
+  const [number,setNumber] = useState(1000)
+  console.log("Parent called")
+  return (
+    <div>
+      <Memo/>
+      <h1>Number : {number}</h1>
+      <button onClick={()=>setNumber(number+1)}>Increment number</button>
+    </div>
+  )
+}
+---------------------------------------------
+import React, { useState } from 'react'
+
+export default function Memo() {
+    const [count,setCount] = useState(0)
+    console.log("Child called")
+  return (
+    <div>
+      <h1>Memorization</h1>
+      <h1>{count} : Memo</h1>
+      <button onClick={() => setCount(count+1)}>Increment</button>
+    </div>
+  )
+}
+---------------------------------------------
+import React, { memo, useState } from 'react'
+
+function Memo() {
+    const [count,setCount] = useState(0)
+    console.log("Child called")
+  return (
+    <div>
+      <h1>Memorization</h1>
+      <h1>{count} : Memo</h1>
+      <button onClick={() => setCount(count+1)}>Increment</button>
+    </div>
+  )
+}
+
+export default memo(Memo)
+--------------------------------
+import React, { useState } from 'react'
+import Memo from './efficiency/Memo'
+
+export default function App() {
+  const [number,setNumber] = useState(1000)
+  console.log("Parent called")
+ 
+  return (
+    <div>
+      <Memo fName = "Adfar" age = {25}/>
+      <h1>Number : {number}</h1>
+      <button onClick={()=>setNumber(number+1)}>Increment number</button>
+    </div>
+  )
+}
+------------------------without useMemo---------------
+import React, { useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  const isOdd =()=>{
+    let i=0;
+    while(i<20000000) i++
+    return count%2 !==0
+  }
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count+1)}>Increment Count</button>
+      <button onClick={() => setCount(count-1)}>Increment Count</button>
+   <h1>{isOdd()?"Odd number":"Even Number"}</h1>
+    <h1>Number: {number}</h1>
+    <button onClick={()=>setNumber(number+1)}>Increment Number</button>
+    <button onClick={()=>setNumber(number-1)}>Increment Number</button>
+    </div>
+  )
+}
+-------------------useMemo-----------------
+import React, { useMemo, useState } from 'react'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  const [number,setNumber] = useState(1000)
+  const isOdd = useMemo(()=>{
+    let i=0;
+    while(i<20000000) i++
+    return count%2 !==0
+  },[count])
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count+1)}>Increment Count</button>
+      <button onClick={() => setCount(count-1)}>Increment Count</button>
+   <h1>{isOdd?"Odd number":"Even Number"}</h1>
+    <h1>Number: {number}</h1>
+    <button onClick={()=>setNumber(number+1)}>Increment Number</button>
+    <button onClick={()=>setNumber(number-1)}>Increment Number</button>
+    </div>
+  )
+}
+----------------------Next Code------------------
+import React, { useMemo, useState } from 'react'
+import Memo from './efficiency/Memo'
+
+export default function App() {
+  const [count,setCount] = useState(0)
+  // const [number,setNumber] = useState(1000)
+  // const isOdd = useMemo(()=>{
+  //   let i=0;
+  //   while(i<20000000) i++
+  //   return count%2 !==0
+  // },[count])
+  console.log("Parent Called")
+  const greet = useMemo(()=>{
+    console.log("greet called")
+  },[])
+  return (
+    <div>
+      <Memo greet={greet}/>
+      <h1>Count: {count}</h1>
+      <button onClick={() => setCount(count+1)}>Increment Count</button>
+      <button onClick={() => setCount(count-1)}>Increment Count</button>
+   {/* <h1>{isOdd?"Odd number":"Even Number"}</h1>
+    <h1>Number: {number}</h1>
+    <button onClick={()=>setNumber(number+1)}>Increment Number</button>
+    <button onClick={()=>setNumber(number-1)}>Increment Number</button> */}
+    </div>
+  )
+}
+---------------------------------
+import React, { memo, useState } from 'react'
+
+function Memo() {
+    const [count,setCount] = useState(0)
+    console.log("Child called")
+  return (
+    <div>
+      <h1>Memorization</h1>
+      <h1>{count} : Memo</h1>
+      <button onClick={() => setCount(count+1)}>Increment</button>
+    </div>
+  )
+}
+
+export default memo(Memo)
+---------------before useCallback--------------
+import React, { useState } from 'react'
+let x = new Set()
+export default function App() {
+  const [count,setCount]=useState(0)
+  const [number,setNumber]=useState(1000)
+  const handleIncrementCount=()=>{
+    setCount(count+1)
+  }
+  const handleDecrementCount=()=>{
+    setCount(count-1)
+  }
+  const handleIncrementNumber=()=>{
+    setNumber(number+1)
+  }
+  const handleDecrementNumber=()=>{
+    setNumber(number-1)
+  }
+  x.add(handleDecrementCount)
+  x.add(handleDecrementNumber)
+  x.add(handleIncrementCount)
+  x.add(handleIncrementNumber)
+  alert(x.size)
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Number: {number}</p>
+      <button onClick={handleIncrementCount}>Increment</button>
+      <button onClick={handleDecrementCount}>Decrement</button>
+      <button onClick={handleIncrementNumber}>Increment Number</button>
+      <button onClick={handleDecrementNumber}>Decrement Number</button>
+    </div>
+  )
+}
+
+---------------Next Code useCallback---------------
+import React, { useCallback, useState } from 'react'
+let x = new Set()
+export default function App() {
+  const [count,setCount]=useState(0)
+  const [number,setNumber]=useState(1000)
+  const handleIncrementCount=useCallback(()=>{
+
+    setCount(count+1)
+  },[count])
+  const handleDecrementCount=useCallback(()=>{
+    setCount(count-1)
+  },[count])
+  const handleIncrementNumber=useCallback(()=>{
+    setNumber(number+1)
+  },[number])
+  const handleDecrementNumber=useCallback(()=>{
+    setNumber(number-1)
+  },[number])
+  x.add(handleDecrementCount)
+  x.add(handleDecrementNumber)
+  x.add(handleIncrementCount)
+  x.add(handleIncrementNumber)
+  alert(x.size)
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <p>Number: {number}</p>
+      <button onClick={handleIncrementCount}>Increment</button>
+      <button onClick={handleDecrementCount}>Decrement</button>
+      <button onClick={handleIncrementNumber}>Increment Number</button>
+      <button onClick={handleDecrementNumber}>Decrement Number</button>
+    </div>
+  )
+}
+------------------Lazy Loading-----------------
+import React, {lazy, Suspense } from 'react'
+import Component1 from './lazy/Component1'
+
+import Component3 from './lazy/Component3'
+const Component2 = lazy(()=>import("./lazy/Component2"))
+export default function App() {
+  return (
+    <div>
+      <Component1/>
+
+      <Suspense fallback={<h1>Please wait...</h1>}>
+      <Component2/>
+      </Suspense>
+      
+      <Component3/>
+    </div>
+  )
+}
+---------------Next Code--------------
+import React, { lazy, Suspense } from "react";
+import Component1 from "./lazy/Component1";
+
+const Component2 = lazy(() => import("./lazy/Component2"));
+const Component3 = lazy(() => import("./lazy/Component3"));
+export default function App() {
+  return (
+    <div>
+      <Component1 />
+
+      <Suspense fallback={<h1>Please wait...</h1>}>
+        <Component2 />
+      </Suspense>
+
+      <Suspense fallback={<h1>Sabar rakho...</h1>}>
+        <Component3 />
+      </Suspense>
+    </div>
+  );
+}
+

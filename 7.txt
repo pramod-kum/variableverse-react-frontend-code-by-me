@@ -1,0 +1,518 @@
+------------------------Nested Routing Outlets--------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+import Phone from './routing/Phone'
+import UserDetails from './routing/UserDetails'
+import Users from './routing/Users'
+
+
+export default function App() {
+  return (
+    <div>
+      
+     
+   <BrowserRouter>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+
+    <Route path='/contact' element={<Contact/>}>
+        <Route path='shop' element={<h1>I am contact shop component</h1>}/>
+        <Route path='blog' element={<h1>I am contact blog component</h1>}/>
+    </Route>
+
+    <Route path='/help' element={<Help/>}/>
+    <Route path='/users' element={<Users/>}/>
+    <Route path='/user/:id' element={<UserDetails/>}/>
+    <Route path='/user/:id/adhar/:ph' element={<Phone/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+---------------------------------------------
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+
+export default function Contact() {
+  return (
+    <div>
+      <h1>I am parent contact component</h1>
+      <Outlet/>
+    </div>
+  )
+}
+--------------------------------Next Code------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+import Phone from './routing/Phone'
+import UserDetails from './routing/UserDetails'
+import Users from './routing/Users'
+
+
+export default function App() {
+  return (
+    <div>
+      
+     
+   <BrowserRouter>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element={<Home/>}>
+          <Route path='/about' element={<About/>}/>
+
+          <Route path='/contact' element={<Contact/>}>
+              <Route path='shop' element={<h1>I am contact shop component</h1>}/>
+              <Route path='blog' element={<h1>I am contact blog component</h1>}/>
+          </Route>
+
+          <Route path='/help' element={<Help/>}/>
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/user/:id' element={<UserDetails/>}/>
+          <Route path='/user/:id/adhar/:ph' element={<Phone/>}/>
+    </Route>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+-------------------------------------------
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+
+export default function Home() {
+  return (
+    <div>
+      <h1>I am a Home Component</h1>
+      <p>I am from bihar</p>
+      <Outlet/>
+    </div>
+  )
+}
+--------------------------next code---------------------
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+
+export default function MainHome() {
+  return (
+    <div>
+      <h1>Mohan Kr</h1>
+      <Outlet/>
+    </div>
+  )
+}
+--------------------------------------------
+import React from 'react'
+
+
+export default function Home() {
+  return (
+    <div>
+      <h1>I am a Home Component</h1>
+      <p>I am from bihar</p>
+      
+    </div>
+  )
+}
+----------------------------------------------
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+
+export default function Contact() {
+  return (
+    <div>
+      <h1>I am parent contact component</h1>
+      <Outlet/>
+    </div>
+  )
+}
+--------------------------------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+
+import MainHome from './routing/MainHome'
+import Navbar from './routing/Navbar'
+import Phone from './routing/Phone'
+import UserDetails from './routing/UserDetails'
+import Users from './routing/Users'
+
+
+export default function App() {
+  return (
+    <div>
+      
+     
+   <BrowserRouter>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element={<MainHome/>}>
+         
+          <Route index element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+
+          <Route path='/contact' element={<Contact/>}>
+              <Route path='shop' element={<h1>I am contact shop component</h1>}/>
+              <Route path='blog' element={<h1>I am contact blog component</h1>}/>
+          </Route>
+
+          <Route path='/help' element={<Help/>}/>
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/user/:id' element={<UserDetails/>}/>
+          <Route path='/user/:id/adhar/:ph' element={<Phone/>}/>
+    </Route>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+------------------------next code---------------------
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import Navbar from './Navbar'
+
+export default function MainHome() {
+  return (
+    <div>
+      <Navbar/>
+      <Outlet/>
+    </div>
+  )
+}
+---------------------------------------------
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import './Navbar.css'
+export default function Navbar() {
+  return (
+    <div>
+      <nav>
+        <li>
+            <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+            <NavLink to="/About">About</NavLink>
+        </li>
+        <li>
+            <NavLink to="/Contact">Contact</NavLink>
+        </li>
+        <li>
+            <NavLink to="/Help">Help</NavLink>
+        </li>
+      </nav>
+    </div>
+  )
+}
+--------------------------------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+
+import MainHome from './routing/MainHome'
+
+import Phone from './routing/Phone'
+import UserDetails from './routing/UserDetails'
+import Users from './routing/Users'
+
+
+export default function App() {
+  return (
+    <div>
+      
+     
+   <BrowserRouter>
+  
+   <Routes>
+    <Route path='/' element={<MainHome/>}>
+         
+          <Route index element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+
+          <Route path='/contact' element={<Contact/>}>
+              <Route path='shop' element={<h1>I am contact shop component</h1>}/>
+              <Route path='blog' element={<h1>I am contact blog component</h1>}/>
+          </Route>
+
+          <Route path='/help' element={<Help/>}/>
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/user/:id' element={<UserDetails/>}/>
+          <Route path='/user/:id/adhar/:ph' element={<Phone/>}/>
+    </Route>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+--------------------------------Next Code------------------
+import React from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+
+import MainHome from './routing/MainHome'
+
+import Phone from './routing/Phone'
+import UserDetails from './routing/UserDetails'
+import Users from './routing/Users'
+
+
+export default function App() {
+  var a =true;
+  return (
+    <div>    
+   <BrowserRouter>
+  
+   <Routes>
+    <Route path='/' element={<MainHome/>}>
+         
+          <Route index element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+
+          <Route path='/contact' element={<Contact/>}>
+              <Route path='shop' element={<h1>I am contact shop component</h1>}/>
+              <Route path='blog' element={<h1>I am contact blog component</h1>}/>
+          </Route>
+
+          <Route path='/help' element={<Help/>}/>
+          <Route path='/users' element={<Users/>}/>
+          <Route path='/user/:id' element={<UserDetails/>}/>
+          <Route path='/user/:id/adhar/:ph' element={<Phone/>}/>
+          <Route path='/profile' element={a?<Navigate to="/about"/>:<Navigate to="/contact"/>}/>
+    </Route>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+---------------------------------------------------
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
+export default function About() {
+  const navigate = useNavigate()
+  function handleClick(){
+    navigate("/contact")
+  }
+  return (
+    <div>
+      <h1>I am about component</h1>
+      <button onClick={handleClick}>Go to Contact</button>
+    </div>
+  )
+}
+-------------------------------------------------
+import React from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+
+export default function Contact() {
+  const navigate = useNavigate()
+ 
+  return (
+    <div>
+      <h1>I am parent contact component</h1>
+      <button onClick={()=>navigate("/")}>Go to Home</button>
+      <Outlet/>
+    </div>
+  )
+}
+--------------------------------------------------
+import React from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+import Navbar from './Navbar'
+
+export default function MainHome() {
+    const navigate = useNavigate()
+  return (
+    <div>
+        <button onClick={()=>navigate(-1)}>Back</button>
+      <Navbar/>
+      <Outlet/>
+    </div>
+  )
+}
+-----------------------------------------------------Prop Drilling using Context-------------
+import React, { createContext } from 'react'
+import Compo1 from './context/Compo1'
+let firstName = createContext()
+let lastName = createContext()
+export default function App() {
+  return (
+    <div>
+       <h1>I am App component</h1>
+       <firstName.Provider value="Pramod">
+
+<lastName.Provider value={"Kumar"}>
+
+<Compo1/>
+
+</lastName.Provider>
+       
+       </firstName.Provider>
+       
+    </div>
+  )
+}
+export {firstName,lastName}
+------------------------------------------
+import React from 'react'
+import Compo2 from './Compo2'
+
+export default function Compo1() {
+  return (
+    <div>
+      <h1>I am a Compo 1</h1>
+      <Compo2/>
+    </div>
+  )
+}
+-------------------------------------------
+import React from 'react'
+import Compo3 from './Compo3'
+
+export default function Compo2() {
+  return (
+    <div>
+       <h1>I am a Compo 2</h1>
+       <Compo3/>
+    </div>
+  )
+}
+-------------------------------------------
+import React from 'react'
+import {firstName,lastName} from '../App'
+export default function Compo3() {
+    console.log(firstName)
+  return (
+    <div>
+
+        <firstName.Consumer>
+{
+    (fname)=>(
+        <lastName.Consumer>
+
+{(lname)=>(
+    <h1>My first name is {fname} and my last name is {lname}</h1>
+)}
+
+        </lastName.Consumer>
+    )
+}
+        </firstName.Consumer>
+       
+    </div>
+  )
+}
+----------------------------Next Code------------------
+import React, { useContext } from 'react'
+import {firstName,lastName} from '../App'
+export default function Compo3() {
+    const fname = useContext(firstName)
+    const lname = useContext(lastName)
+    
+  return (
+    <div>
+ <h1>My first name is {fname} and my last name is {lname}</h1>
+        {/* <firstName.Consumer>
+{
+    (fname)=>(
+        <lastName.Consumer>
+
+{(lname)=>(
+    <h1>My first name is {fname} and my last name is {lname}</h1>
+)}
+
+        </lastName.Consumer>
+    )
+}
+        </firstName.Consumer> */}
+       
+    </div>
+  )
+}
+--------------------------Next Code------------------
+import React, {createContext, useState } from 'react'
+let myContext = createContext()
+export default function CounterProvider({children}) {
+    const [count,setCount] = useState(0)
+    function handleIncrement(){
+        setCount(count+1)
+    }
+    function handleDecrement(){
+        setCount(count-1)
+    }
+  return (
+    <myContext.Provider value={{count,setCount,handleIncrement,handleDecrement}}>
+       {children}
+    </myContext.Provider>
+  )
+}
+export {myContext}
+--------------------------------------------
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import App from './App';
+import CounterProvider from './context/CounterProvider';
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  
+  <CounterProvider>
+
+<App/>
+
+  </CounterProvider>
+
+);
+
+
+-----------------------------------------------------
+import React, { useContext } from 'react'
+import Compo1 from './context/Compo1'
+import{myContext} from './context/CounterProvider'
+export default function App() {
+  let {count,setCount,handleIncrement,handleDecrement} = useContext(myContext)
+  
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={handleDecrement}>---</button>
+      <button onClick={handleIncrement}>+++</button>
+   <Compo1/>
+    </div>
+  )
+}
+----------------------------------------------------
+import React, { useContext } from 'react'
+import {myContext} from './CounterProvider'
+
+export default function Compo1() {
+    let {count} = useContext(myContext)
+  return (
+    <div>
+      <h1>I am a Compo 1 -> {count}</h1>
+      
+    </div>
+  )
+}
+

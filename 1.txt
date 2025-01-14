@@ -1,0 +1,333 @@
+---------------------------//Named Export -----------------------------
+function Contact(){
+    return<div>
+        <p>Hellow World</p>
+    </div>
+}
+function Adfar(){
+    return <div>
+        Susant
+    </div>
+}
+export {Contact} //Named Export 
+-------------------
+import About from "./components/About";
+import {Contact} from "./components/Contact"
+function App() {
+  
+  return (
+    <>
+    <h1>Pramod Kumar</h1>
+    <About/>
+    <Contact/>
+    </>
+   
+  );
+}
+
+
+export default App;
+------------------------------//Default Export--------------------------------
+function Contact(){
+    return<div>
+        <p>Hellow World</p>
+    </div>
+}
+function Adfar(){
+    return <div>
+        Susant
+    </div>
+}
+export default Contact //Default Export 
+---------------------
+import About from "./components/About";
+import Default from "./components/Contact"
+function App() {
+  
+  return (
+    <>
+    <h1>Pramod Kumar</h1>
+    <About/>
+    <Default/> 
+    </>
+   
+  );
+}
+
+
+export default App;
+
+--------------------------------//Calling on function to another function------------------------------
+function Contact(props){
+    console.log(props)
+    return<div>
+        <p>Hellow World</p>
+    {Adfar()}
+    </div>
+    
+}
+function Adfar(){
+    return <div>
+        Susant
+    </div>
+}
+export default Contact //Default Export 
+-----------------------------------
+function Contact(props){
+    console.log(props)
+    return<div>
+        <p>Hellow World</p>
+    <Adfar/>
+    </div>
+    
+}
+function Adfar(){
+    return <div>
+        Susant
+    </div>
+}
+export default Contact //Default Export 
+----------------------------------//Pass Argument inside Function--------------------------------------
+
+function Contact(props){
+   
+    console.log(props)
+   
+   return<div>
+        <p>Hellow World</p>
+    
+    </div>
+    
+}
+
+export default Contact //Default Export 
+----------------------------------
+import About from "./components/About";
+import Contact from "./components/Contact"
+function App() {
+  let fName="Pramod"
+  return (
+    <>
+    <h1>Pramod Kumar</h1>
+    <About/>
+    
+    //wastage
+    //props driling
+    <Contact firstName={fName} secondName="Kuamar"/> 
+  
+    </>   
+   
+  );
+}
+
+
+export default App;
+-----------------------------------
+import Shop from "./Shop"
+
+function Contact(props){
+   
+    console.log(props)
+   
+   return<div>
+        <p>Hellow World</p>
+        <h1>My first Name is :{props.firstName}</h1>
+        <h1>My second Name is :{props.secondName}</h1>
+    </div>
+    
+}
+
+export default Contact //Default Export 
+
+--------------------------D-Struchiring------------------
+import Shop from "./Shop"
+
+function Contact({firstName,lastName}){
+   
+   
+   
+   return<div>
+        <p>Hellow World-1</p>
+        <Shop fName={firstName} sName={lastName}/>
+    </div>
+    
+}
+
+export default Contact //Default Export 
+-------------------------------------------
+import React from 'react'
+
+function Shop({fName,sName}) {
+  return (
+    <div>
+        <h1>Shop</h1>
+          <h1>My first Name is :{fName}</h1>
+         <h1>My second Name is :{sName}</h1>
+    </div>
+  )
+}
+
+export default Shop
+-----------------------------------Children of Prop---------------------------------
+import React from 'react'
+
+function Blog(props) {
+  return (
+    <div>{props.children}</div>
+  )
+}
+
+export default Blog
+---------------------------------------------
+import About from "./components/About";
+import Contact from "./components/Contact";
+import Blog from "./components/Blog";
+function App() {
+  let fName="Pramod"
+  return (
+    <>
+    <h1>Pramod Kumar</h1>
+    <About/>
+    
+    <Blog>
+      <h2>Blog-K</h2>
+      <p>This is a Blog</p>
+    </Blog>
+  
+    </>   
+   
+  );
+}
+
+
+export default App;
+-----------------------------D-Struchiring Children of Prop-------------------
+import React from 'react'
+
+function Blog({children}) {
+  return (
+    <div>{children}</div>
+  )
+}
+
+export default Blog
+
+---------------------Map Array--------------
+import React from 'react'
+
+function App() {
+  let data =["HTML","CSS","JAVA"]
+  return (
+    <div>
+      <h1>My First react App</h1>
+      <ul>
+        {data.map((item,index)=>{
+         return <li>{item}</li>
+        })}
+      </ul>
+    </div>
+  )
+}
+
+export default App
+-------------------------------Nested Array-----------------------
+import React from 'react'
+
+function App() {
+  let data =[
+    ["Name","Age","Salary"],
+    ["Pramod","26","30000"],
+    ["Ayansh","24","20000"],
+  ]
+  return (
+    <div>
+      <h1>My First react App</h1>
+      <ul>
+        {data.map((item,index)=>{
+         return item.map((x,y)=>{
+          return<li>{x}</li>
+         })
+        })}
+      </ul>
+    </div>
+  )
+}
+
+export default App
+----------------------------Show Arry Data inside Table using slice Map-------------
+import React from 'react'
+
+function App() {
+  var data = [
+    ["Id","Name","Age"],
+  {id: 1,name:'Pramod',age:26 },
+  {id: 2,name:'Ayansh',age:26 }
+  ]
+  return (
+    <div>
+      <table border="1px">
+        <tr>
+          <th>{data[0][0]}</th>
+          <th>{data[0][1]}</th>
+          <th>{data[0][2]}</th>
+        </tr>
+       {data.slice(1).map((item,index)=>{
+        return <tr>
+          <td>{item.id}</td>
+          <td>{item.name}</td>
+          <td>{item.age}</td>
+        </tr>
+       })}
+      </table>
+    </div>
+  )
+}
+
+export default App
+
+-------------------------Use Key for remove console Error-----------------------
+import React from 'react'
+
+function App() {
+  let data =["HTML","CSS","JAVA","HTML"]
+  return (
+    <div>
+      <h1>My First react App</h1>
+      <ul>
+        {data.map((item,index)=>{
+         return <li key={index}>{item}</li>
+        })}
+      </ul>
+    </div>
+  )
+}
+
+export default App
+
+------------------------------Pass Object Arry name age in props-------------------------
+import React from 'react'
+import Blog from './components/Blog'
+function App() {
+  return (
+    <div>
+      <Blog obj={{id:1,name:"Pramod"}} fName="Pramod" skills ={["HTml","CSS","JS"]} age={26}/>
+    </div>
+  )
+}
+
+export default App
+------------------------------------------
+import React from 'react'
+
+function Blog(props) {
+  return (
+    <div>{props.skills.map((item,index)=>{
+return <li key={index}>{item}</li>
+    })}
+    </div>
+  )
+}
+
+export default Blog
+
+

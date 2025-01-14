@@ -1,0 +1,537 @@
+-----------------------Router Dom------------------------
+for install command is: npm i react-router-dom
+----------------------------------------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+export default function App() {
+  return (
+    <div>
+   <BrowserRouter>
+   <Routes>
+    <Route path='/' element={<h1>I am a Home Componenet</h1>}/>
+    <Route path='/about' element={<h1>I am a About Componenet</h1>}/>
+    <Route path='/contact' element={<h1>I am a Contact Componenet</h1>}/>
+    <Route path='/help' element={<h1>I am a Help Componenet</h1>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+--------------------------Next Code--------------------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+
+
+export default function App() {
+  return (
+    <div>
+      
+   <BrowserRouter>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/help' element={<Help/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+----------------------------------
+import React from 'react'
+
+export default function Home() {
+  return (
+    <div>
+      <h1>I am a Home Component</h1>
+    </div>
+  )
+}
+---------------------------------
+import React from 'react'
+
+export default function About() {
+  return (
+    <div>
+      about
+    </div>
+  )
+}
+-------------------------------
+import React from 'react'
+
+export default function Contact() {
+  return (
+    <div>
+      contact
+    </div>
+  )
+}
+---------------------------------
+import React from 'react'
+
+export default function Help() {
+  return (
+    <div>
+      Help
+    </div>
+  )
+}
+-------------------------------Next Code----------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+
+
+export default function App() {
+  return (
+    <div>
+      <Navbar/>
+   <BrowserRouter>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/help' element={<Help/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+--------------------------------
+import React from 'react'
+
+export default function Navbar() {
+  return (
+    <div>
+      <nav>
+        <li>
+            <a href="/Home">Home</a>
+        </li>
+        <li>
+            <a href="/About">About</a>
+        </li>
+        <li>
+            <a href="/Contact">Contact</a>
+        </li>
+        <li>
+            <a href="/Help">Help</a>
+        </li>
+      </nav>
+    </div>
+  )
+}
+-------------------------------
+import React from 'react'
+
+export default function Home() {
+  return (
+    <div>
+      <h1>I am a Home Component</h1>
+    </div>
+  )
+}
+---------------------------------
+import React from 'react'
+
+export default function About() {
+  return (
+    <div>
+      about
+    </div>
+  )
+}
+-------------------------------
+import React from 'react'
+
+export default function Contact() {
+  return (
+    <div>
+      contact
+    </div>
+  )
+}
+---------------------------------
+import React from 'react'
+
+export default function Help() {
+  return (
+    <div>
+      Help
+    </div>
+  )
+}
+---------------------------------Next Code--------------------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Counter from './routing/Counter'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+
+
+export default function App() {
+  return (
+    <div>
+      <Navbar/>
+      <Counter/>
+   <BrowserRouter>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/help' element={<Help/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+---------------------------------------------
+import React, { useState } from 'react'
+
+export default function Counter() {
+    const [count,setCount] = useState(0)
+  return (
+    <div>
+      <h1 onClick={()=>setCount(count+1)}>Count : {count}</h1>
+    </div>
+  )
+}
+---------------------------Next Code No Refresh Navbar--------------------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Counter from './routing/Counter'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+
+
+export default function App() {
+  return (
+    <div>
+      
+      <Counter/>
+   <BrowserRouter>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/help' element={<Help/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+---------------------------------------
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+export default function Navbar() {
+  return (
+    <div>
+      <nav>
+        <li>
+            <Link to="/Home">Home</Link>
+        </li>
+        <li>
+            <Link to="/About">About</Link>
+        </li>
+        <li>
+            <Link to="/Contact">Contact</Link>
+        </li>
+        <li>
+            <Link to="/Help">Help</Link>
+        </li>
+      </nav>
+    </div>
+  )
+}
+-------------------------Next Code NavLink-------------
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+
+export default function Navbar() {
+  return (
+    <div>
+      <nav>
+        <li>
+            <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+            <NavLink to="/About">About</NavLink>
+        </li>
+        <li>
+            <NavLink to="/Contact">Contact</NavLink>
+        </li>
+        <li>
+            <NavLink to="/Help">Help</NavLink>
+        </li>
+      </nav>
+    </div>
+  )
+}
+-----------------------------------------
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import './Navbar.css'
+export default function Navbar() {
+  return (
+    <div>
+      <nav>
+        <li>
+            <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
+            <NavLink to="/About">About</NavLink>
+        </li>
+        <li>
+            <NavLink to="/Contact">Contact</NavLink>
+        </li>
+        <li>
+            <NavLink to="/Help">Help</NavLink>
+        </li>
+      </nav>
+    </div>
+  )
+}
+------------------------------------
+.active {
+background-color: lightgreen;
+}
+---------------------------------Next Code Css---------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Component1 from './css/Component1'
+import Component2 from './css/Component2'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Counter from './routing/Counter'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+
+
+export default function App() {
+  return (
+    <div>
+      <Component1/>
+      <Component2/>
+      <Counter/>
+   <BrowserRouter>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/help' element={<Help/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+----------------------------------------------------
+import React from 'react'
+import "./Component1.css"
+export default function Component1() {
+  return (
+    <div>
+      <h1 className='heading1'>I am Component 1</h1>
+      <p className='para1'>I am a paragraph 1</p>
+    </div>
+  )
+}
+--------------------------------------------------
+import React from 'react'
+import "./Component2.css"
+export default function Component2() {
+  return (
+    <div>
+      <h1 className='heading2'>I am Component 2</h1>
+      <p className='para2'>I am a paragraph 2</p>
+    </div>
+  )
+}
+------------------------------------------------
+.heading1 {
+background-color : greenyellow;
+padding: 20px;
+border: 2px solid red;
+}
+.para1 {
+    background-color: lightcoral;
+    padding: 15px;
+}
+------------------------------------------------
+.heading2{
+    background-color: aqua;
+    padding: 30px;
+    border-radius: 20px;
+}
+.para2{
+    font-size: 20px;
+    background-color: red;
+}
+---------------------------Next Code--------------------------------
+ run command: npm run build
+----------------------------------CSS module---------------
+import React from 'react'
+import style from "./Component1.module.css"
+export default function Component1() {
+  return (
+    <div className={style["main-heading"]}>
+      <h1 className={style.heading1}>I am Component 1</h1>
+      <p className={style.para1}>I am a paragraph 1</p>
+    </div>
+  )
+}
+---------------------------------------------------
+import React from 'react'
+import style from "./Component2.module.css"
+import myStyle from "./Component1.module.css"
+export default function Component2() {
+ console.log(style)
+  return (
+    <div id={style.main}>
+      <h1 className={style.heading1}>I am Component 2</h1>
+      <p className={style.para1}>I am a paragraph 2</p>
+    <h1 className={myStyle.heading2}>Ayansh</h1>
+    </div>
+  )
+}
+------------------------------------------------
+.heading1 {
+background-color : greenyellow;
+padding: 20px;
+border: 2px solid red;
+}
+.para1 {
+    background-color: lightcoral;
+    padding: 15px;
+}
+.main-heading{
+    background-color: lightblue;
+}
+.heading2{
+    background-color: blue;
+}
+---------------------------------------------
+.heading1{
+    background-color: aqua;
+    padding: 30px;
+    border-radius: 20px;
+}
+.para1{
+    font-size: 20px;
+    background-color: red;
+}
+#main{
+    background-color: red;
+}
+--------------------------------------Router Dom--------------------
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './routing/About'
+import Contact from './routing/Contact'
+import Help from './routing/Help'
+import Home from './routing/Home'
+import Navbar from './routing/Navbar'
+import Phone from './routing/Phone'
+import UserDetails from './routing/UserDetails'
+import Users from './routing/Users'
+
+
+export default function App() {
+  return (
+    <div>
+      
+     
+   <BrowserRouter>
+   <Navbar/>
+   <Routes>
+    <Route path='/' element={<Home/>}/>
+    <Route path='/about' element={<About/>}/>
+    <Route path='/contact' element={<Contact/>}/>
+    <Route path='/help' element={<Help/>}/>
+    <Route path='/users' element={<Users/>}/>
+    <Route path='/user/:id' element={<UserDetails/>}/>
+    <Route path='/user/:id/adhar/:ph' element={<Phone/>}/>
+   </Routes>
+   </BrowserRouter>
+    </div>
+  )
+}
+---------------------------------------------------------------
+import React from 'react'
+import { useParams } from 'react-router-dom'
+
+
+export default function UserDetails() {
+    // const obj = useParams()
+    //     console.log(obj)
+    const {id} = useParams()
+    console.log(id)
+    
+  return (
+    <div>
+      <h1>Details</h1>
+      {/* <p>I am {obj.id} Details</p> */}
+     {id === "user1" && (
+        <h1>I am Pramod Kumar and age is 26</h1>
+     )}
+     {id === "user2" && (
+        <h1>I am Ayansh Kumar and age is 24</h1>
+     )}
+     {id === "user3" && (
+        <h1>I am Ankit Kumar and age is 25</h1>
+     )}
+    </div>
+  )
+}
+-----------------------------------------------------
+import React from 'react'
+import { useParams } from 'react-router-dom'
+
+export default function Phone() {
+    // let obj = useParams()
+    // console.log(obj)
+    let {id,ph} = useParams()
+  return (
+    <div>
+      {(id === "user1" && ph === "7") && (
+        <h1>I am Pramod Kumar and my phone number is 8877065166</h1>
+      )}
+      {(id === "user2" && ph === "6") && (
+        <h1>I am Ayansh Kumar and my phone number is 9977065166</h1>
+      )}
+    </div>
+  )
+}
+---------------------------------------
+import React from 'react'
+
+export default function Users() {
+  return (
+    <div>
+      <h1>Main users component</h1>
+    </div>
+  )
+}
+--------------------------------------------
+url: http://localhost:3000/User/user2/adhar/6
+
+

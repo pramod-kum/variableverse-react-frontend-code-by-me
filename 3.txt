@@ -1,0 +1,155 @@
+--------------To way Data Binding------------------------
+import React, { useState } from 'react'
+
+export default function App() {
+  const [username,setUsername] = useState("Pramod")
+  const [pass,setPass] = useState("1234")
+  return (
+    <div>
+      <form>
+        <input type="text" placeholder='Enter username' value={username} onChange={(event)=>setUsername(event.target.value)}/>
+        <input type="pass" placeholder='Enter Password' value={pass}/>
+        <button>Login</button>
+     <h1>{username}</h1>
+      </form>
+    </div>
+  )
+}
+--------------To way Data Binding------------------------
+import React, { useState } from 'react'
+
+export default function App() {
+  const [username,setUsername] = useState("")
+  const [pass,setPass] = useState("")
+  const [condition,setCondition] = useState(false)
+  function handleForm(e){
+    e.preventDefault()
+    setCondition(true)
+  }
+  return (
+    <div>
+      <form onSubmit={handleForm}>
+        <input type="text" placeholder='Enter username' value={username} onChange={(event)=>setUsername(event.target.value)}/>
+        <input type="pass" placeholder='Enter Password' value={pass} onChange={(e)=>setPass(e.target.value)}/>
+        <button>Login</button>
+     {condition && (
+      <>
+      <h1>I am {username} and my Password is {pass}</h1>
+      </>
+     )}
+      </form>
+    </div>
+  )
+}
+--------------To way Data Binding------------------------
+import React, { useState } from 'react'
+
+export default function App() {
+  
+  const [data,setData] = useState({
+    username:"",
+    email:"",
+    pass:""
+    
+  })
+  const [condition,setCondition] = useState(false)
+  function handleForm(e){
+    e.preventDefault()
+    setCondition(true)
+  }
+  return (
+    <div>
+      <form onSubmit={handleForm}>
+        <input type="text" placeholder='Enter username' value={data.username} onChange={(event)=>{setData((prev)=>({...prev,username:event.target.value}))}}/>
+        <input type="pass" placeholder='Enter Password' value={data.pass} onChange={(e)=>{setData((prev)=>({...prev,pass:e.target.value}))}}/>
+        <input type="email" placeholder='Enter Email' value={data.email} onChange={(e)=>{setData((prev)=>({...prev,email:e.target.value}))}}/>
+        <button>Login</button>
+     {condition && (
+      <>
+      <h1>I am {data.username} and my Email is {data.email} and my Password is {data.pass}</h1>
+      </>
+     )}
+      </form>
+    </div>  
+  )
+}
+---------------------------Constructure---------------------------
+class employee{
+    constructor(name,age){
+        this.name=name;
+        this.age=age;
+    }
+}
+const s1 = new employee("Pramod",26)
+console.log(s1)
+------------------------Constructure------------------------------
+class employee{
+    constructor(name,age){
+        this.name=name;
+        this.age=age;
+        console.log("Parent")
+    }
+    displayInfo(){
+        console.log("Name in parent is ",this.name)
+        console.log("Age in parent is ",this.age)
+    }
+}
+class manager extends employee{
+  
+    constructor(){
+        super()
+        console.log("Ayansh")
+    }
+
+   displayInfo(){
+    super.displayInfo()
+    console.log("Pramod")
+    console.log(this.name)
+    console.log(this.age)
+   }
+
+   pranodInfo(){
+    console.log("Kumar")
+   }
+}
+const s1 = new manager("Pramod",26)
+console.log(s1)
+s1.displayInfo()
+------------------------------ Count Increment using component Interface-------------------------
+//Reactrcc
+import React, { Component } from 'react'
+
+export default class Comp1 extends Component {
+    constructor(){
+        super()
+       this.state ={count:0}
+      // this.handleIncrement=this.handleIncrement.bind(this)
+    }
+    handleIncrement=()=>{
+        this.setState({count:this.state.count+1})
+    }
+    //  handleIncrement(){
+    //     this.setState({count:this.state.count+1})
+    // }
+  render() {
+    return (
+      <div>
+        <p>{this.props.username}</p>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.handleIncrement}>Increment</button>
+      </div>
+    )
+  }
+}
+----------------------------------------
+import React from 'react'
+import Comp1 from './class/Comp1'
+
+export default function App() {
+  return (
+    <div>
+      <Comp1 username = "Pramod Kumar"/>
+    </div>
+  )
+}
+
